@@ -44,8 +44,8 @@ var b = function (t) {
 app.get('/', function (req, res) {
     //   var u =  eval(req.query.s3)
     var h1 , h2 , obj , sendback
-    typeof req.query.s1 == "undefined" ? h1=true : h1=false
-    typeof req.query.s2 == "undefined" ? h2=true : h2=false
+    typeof req.query.s1 == "undefined" ? h1=false : h1=true
+    typeof req.query.s2 == "undefined" ? h2=false : h2=true
     obj = new Object()
     if (h1 && h2){
          obj.errno = 0
