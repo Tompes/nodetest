@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-u = function s(j, r) {
+var u = function s(j, r) {
     var a = [];
     var p = [];
     var o = "";
@@ -26,7 +26,7 @@ u = function s(j, r) {
     }
     return o
 };
-var b=function (t) {
+var b = function (t) {
     var r, e, a, n, i, o, s = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
     for (a = t.length, e = 0, r = ""; a > e;) {
         if (n = 255 & t.charCodeAt(e++), e == a) {
@@ -43,19 +43,31 @@ var b=function (t) {
 }
 app.get('/', function (req, res) {
     //   var u =  eval(req.query.s3)
-     var haveS1 , haveS2
-     typeof req.query.s1 == "undefined" ? haveS1=true:haveS1=false
-     typeof req.query.s2 == "undefined" ? haveS1=true:haveS1=false
-     var sendback = b(u(req.query.s1.trim(),req.query.s2.trim())) +"<br>"+process.env.PORT+"<br>"+JSON.stringify(process.env);
+    var h1 , h2 , obj , sendback
+    typeof req.query.s1 == "undefined" ? h1=true : h1=false
+    typeof req.query.s2 == "undefined" ? h2=true : h2=false
+    obj = new Object()
+    if (h1 && h2){
+         obj.errno = 0
+         obj.sign  = b(u(req.query.s1.trim() , req.query.s2.trim()))
+         obj.msg   = "Successed!"
+         sendBack = JSON.stringify(obj)
 
-    console.log(u(req.query.s1.trim(),req.query.s2.trim()))
-  res.send(sendback);
-  
+    }else {
+         obj.errno = 1
+         obj.sign  = null
+         obj.msg   = "Failed"
+         sendBack = JSON.stringify(obj)
+    }
+    
+    res.setHeader("Content-Type","application/json")
+    res.send(sendBack);
+    
 });
 
 var server = app.listen(process.env.PORT || 3000, function () {
-  var host = server.address().address;
-  var port = server.address().port;
+    var host = server.address().address;
+    var port = server.address().port;
 
-  console.log('Example app listening at http://%s:%s', host, port);
+    console.log('app listening at http://%s:%s', host, port);
 });
