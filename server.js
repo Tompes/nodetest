@@ -55,7 +55,7 @@ app.get('/', function (req, res) {
 
     }else {
          obj.errno = 1
-         obj.sign  = null
+         obj.sign  = ""
          obj.msg   = "Failed"
          sendBack = JSON.stringify(obj)
     }
