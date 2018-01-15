@@ -46,7 +46,7 @@ app.get('/', function (req, res) {
      var haveS1 , haveS2
      typeof req.query.s1 == "undefined" ? haveS1=true:haveS1=false
      typeof req.query.s2 == "undefined" ? haveS1=true:haveS1=false
-     var sendback = b(u(req.query.s1.trim(),req.query.s2.trim())) +"<br>"+process.env.PORT
+     var sendback = b(u(req.query.s1.trim(),req.query.s2.trim())) +"<br>"+process.env.PORT+"<br>"+process.env.toString()
 
     console.log(u(req.query.s1.trim(),req.query.s2.trim()))
   res.send(sendback);
